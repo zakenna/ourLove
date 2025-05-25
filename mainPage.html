@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <plan>Our Love Script</plan>
+    <link rel="stylesheet" href="mainPage.css">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+</head>
+<body>
+    <div class="banner">
+        <div class="home">
+            <h4>메인페이지</h4>
+        </div> 
+        <div class="schedule">
+            <h4>스케줄</h4>
+        </div>  
+        <div class="album">
+            <h4>앨범</h4>
+        </div>  
+        <div class="playlist">
+            <h4>플레이리스트</h4>
+        </div>  
+    </div>
+
+    <!-- 2. 달력을 보여줄 영역 만들기 -->
+    <div id='Calendar'> 
+        <input type="text" id="plan" placeholder="할일을 적어주세요.">
+        <input type="date" id="date">
+        <button onclick="send()">등록</button>
+        <button onclick="remove()">삭제</button>
+        <hr>
+    </div>
+
+    <script>
+    let calendar;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const calendarEl = document.getElementById('Calendar');
+        calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: []
+        });
+        calendar.render();
+    });
+
+    // 일정 추가 함수
+    function send() {
+        const plan = document.getElementById('plan').value;
+        const date = document.getElementById('date').value;
+        if (!plan || !date) {
+            alert("계획과 날짜를 모두 입력해주세요.");
+            return;
+        }
+
+        // FullCalendar에 이벤트 추가
+        calendar.addEvent({
+            title: plan,
+            start: date
+        });
+
+        // 입력창 초기화
+        document.getElementById('plan').value = '';
+        document.getElementById('date').value = '';
+    }
+
+    // 일정 삭제 함수
+    function remove() {
+        const plan = document.getElementById('plan').value.trim();
+        const date = document.getElementById('date').value;
+        const events = calendar.getEvents(); // 현재 등록된 이벤트 전체
+
+        if (!plan || !date) {
+            alert("삭제할 계획과 날짜를 모두 입력해주세요.");
+            return;
+        }
+
+        const targetDate = new Date(date);
+
+        // 제목과 날짜가 모두 일치하는 이벤트를 찾아서 삭제
+        const target = events.find(event => {
+            const eventDate = new Date(event.start);
+            return event.title === plan &&
+                   eventDate.getFullYear() === targetDate.getFullYear() &&
+                   eventDate.getMonth() === targetDate.getMonth() &&
+                   eventDate.getDate() === targetDate.getDate();
+        });
+
+        if (target) {
+            target.remove(); // 삭제
+            alert("이벤트를 삭제했어요.");
+        } else {
+            alert("일치하는 이벤트가 없어요.");
+        }
+
+        // 입력창 초기화
+        document.getElementById('plan').value = '';
+        document.getElementById('date').value = '';
+    }
+</script>
+
+</body>
+</html>
