@@ -19,3 +19,107 @@
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+
+.banner {
+    background: linear-gradient(135deg, #fbeaff 0%, #e0e7ff 100%);
+    font-family: 'Gowun Dodum', 'SUIT', 'Pretendard', 'Noto Sans KR', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    margin: 40px auto 32px auto;
+    padding: 18px 32px;
+    border-radius: 32px;
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 32px rgba(255, 120, 180, 0.08), 0 1.5px 8px rgba(99,102,241,0.09);
+    backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(255, 182, 193, 0.15);
+    max-width: 700px;
+    position: relative;
+    z-index: 10;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 18px;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.18s;
+    position: relative;
+    font-size: 1.1rem;
+    color: #8f5fa7;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background: transparent;
+}
+
+.nav-item .icon {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+    transition: transform 0.2s;
+}
+
+.nav-item .text {
+    font-family: 'Gowun Dodum', 'SUIT', 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.nav-item:hover, .nav-item:focus {
+    background: linear-gradient(135deg, #ffe0f4 10%, #e0e7ff 90%);
+    box-shadow: 0 4px 16px rgba(255, 182, 193, 0.15), 0 0.5px 2px rgba(99,102,241,0.08);
+    transform: translateY(-2px) scale(1.06);
+    color: #b8326a;
+}
+
+.nav-item:hover .icon, .nav-item:focus .icon {
+    transform: scale(1.18) rotate(-8deg);
+    animation: heartbeat 0.8s;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1.18) rotate(-8deg);}
+    20% { transform: scale(1.3) rotate(-8deg);}
+    40% { transform: scale(1.1) rotate(-8deg);}
+    60% { transform: scale(1.25) rotate(-8deg);}
+    80% { transform: scale(1.18) rotate(-8deg);}
+    100% { transform: scale(1.18) rotate(-8deg);}
+}
+
+.nav-item:active {
+    background: #ffb6d5;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(255, 182, 193, 0.12);
+}
+
+@media (max-width: 600px) {
+    .banner {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 8px;
+        border-radius: 18px;
+        max-width: 95vw;
+    }
+    .nav-item {
+        font-size: 1rem;
+        padding: 9px 12px;
+        border-radius: 12px;
+    }
+    .nav-item .icon {
+        font-size: 1.3rem;
+    }
+}
+
+#Calendar {
+    display: block;
+    width: 100%;
+    min-width: 320px;
+    min-height: 480px;
+    position: relative;
+    z-index: 1;
+}
